@@ -1,0 +1,10 @@
+{
+  "projects": [
+    "src",
+    "test"
+  ],
+  "sdk": {
+    "version": "6.0.412",
+    "rollForward": "disable"
+  }
+}
