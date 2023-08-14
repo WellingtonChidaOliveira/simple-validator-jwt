@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HSgGtQfMQUmew1TpzBTuf+cRVTpMGU0KoIXa8veMCOFHPRjepH6Msic/kcc1MZL9EgtPaKWDc9zxoH1LaXnEaw==",
+  "dgSpecHash": "yvR5ke9A9yVP2Dlx1VW4/Kemzv5juCZndEdVh2LvNKwuLOcu2RnkRjt2RqYw+6igjBA2bTXDiPJZ5Gr12tnbIw==",
   "success": true,
-  "projectFilePath": "d:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj",
+  "projectFilePath": "D:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\welli\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\welli\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj": {}
+    "D:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj": {}
   },
   "projects": {
-    "d:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj": {
+    "D:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj",
+        "projectUniqueName": "D:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj",
         "projectName": "AuthJwt",
-        "projectPath": "d:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj",
+        "projectPath": "D:\\Projetos\\IdentityResource\\AuthJwt\\src\\AuthJwt.csproj",
         "packagesPath": "C:\\Users\\welli\\.nuget\\packages\\",
-        "outputPath": "d:\\Projetos\\IdentityResource\\AuthJwt\\src\\obj\\",
+        "outputPath": "D:\\Projetos\\IdentityResource\\AuthJwt\\src\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\VisualStudioInstall\\Shared\\NuGetPackages"

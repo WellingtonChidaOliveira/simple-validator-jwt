@@ -1,4 +1,4 @@
-namespace Namespace;
+namespace AuthJwt;
 public class User
 {
     public int Id { get; set; }

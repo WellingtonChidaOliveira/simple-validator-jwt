@@ -1,7 +1,7 @@
-namespace Namespace;
-public class UserRepository
+namespace AuthJwt;
+public static class UserRepository
 {
-    public User Get(string userName, string password)
+    public static User Get(string userName, string password)
     {
         //Mocking the user data
         var user = new List<User>
@@ -10,7 +10,7 @@ public class UserRepository
             new User { Id = 2, Name = "user", Password = "user", Role = "user" }
         };
 
-        return user.Where(x => x.Name.ToLower() == userName.ToLower() && x.Password == password).FirstOrDefault();
+        return user.Where(x => x.Name.ToLower() == userName.ToLower() && x.Password == x.Password).FirstOrDefault();
     }
     
 }
