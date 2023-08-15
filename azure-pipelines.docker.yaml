@@ -1,0 +1,33 @@
+pool:
+  vmImage: 'Ubuntu latest'
+
+variables:
+  buildConfiguration: 'Release'
+  imageName: 'authjwt:latest'
+  sourceDirectory: 'src/AuthJwt.csproj'
+  dotNetVersion: '6.0.x'
+
+
+steps:
+- checkout: self
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '$(dotNetVersion)'
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- script: dotnet restore
+  displayName: 'dotnet restore'
+  workingDirectory: $(sourceDirectory)
+
+- script: dotnet build --configuration $(buildConfiguration) --project $(sourceDirectory)/AuthJwt.csproj
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- script: docker build --no-cache -f Dockerfile -t $(dockerId)/$(imageName) .
+  displayName: 'docker build $(imageName)'
+
+- script: |
+    docker login -u $(dockerId) -p $(dockerPassword)
+    docker push $(dockerId)/$(imageName)
+  displayName: 'docker push $(imageName)'
