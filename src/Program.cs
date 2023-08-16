@@ -1,10 +1,17 @@
 using System.Text;
 using AuthJwt;
+using AuthJwt.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 var key = Encoding.ASCII.GetBytes(Settings.Secret);
+
+builder.Services.AddDbContext<ApplicationContext>(o =>
+    o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+    builder.Services.AddTransient<ApplicationContext>();
 
 builder.Services.AddAuthentication(x =>
 {
@@ -30,6 +37,21 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
+using(var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationContext>();
+        var created = context.Database.EnsureCreated();
+        context.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating or initializing the database.");
+    }
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -39,13 +61,21 @@ app.MapGet("/", () => "Hello World!");
 
 app.MapPost("/login", (User user) =>
 {
-    var getUser = UserRepository.Get(user.Name, user.Password);
-    if (getUser == null)
-        return Results.Unauthorized();
-    
-    var token = TokenService.GenerateToken(getUser);
-    user.Password = string.Empty;
-    return Results.Ok(new {getUser,token});
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ApplicationContext>();
+        
+        var userRepository = new UserRepository(context); 
+        var getUser = userRepository.Get(user.Name, user.Password);
+        
+        if (getUser == null)
+            return Results.Unauthorized();
+
+        var token = TokenService.GenerateToken(getUser);
+        user.Password = string.Empty;
+        return Results.Ok(new { getUser, token });
+    }
 });
 
 app.MapGet("/anonymous", () => "Hello anonymous");
@@ -54,7 +84,7 @@ app.MapGet("/authenticated", () => "Hello authenticated").RequireAuthorization()
 
 app.MapGet("/admin", () => "Hello Admin").RequireAuthorization("Admin");
 
-app.MapGet("/user", ()=> "Hello user").RequireAuthorization("User");
+app.MapGet("/user", () => "Hello user").RequireAuthorization("User");
 
 
 
