@@ -82,7 +82,7 @@ app.MapGet("/anonymous", () => "Hello anonymous");
 
 app.MapGet("/authenticated", () => "Hello authenticated").RequireAuthorization();
 
-app.MapGet("/admin", () => "Hello Admin").RequireAuthorization("Admin");
+app.MapGet("/admin", () => "Hello Admin1").RequireAuthorization("Admin");
 
 app.MapGet("/user", () => "Hello user").RequireAuthorization("User");
 
